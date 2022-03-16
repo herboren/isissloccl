@@ -1,4 +1,3 @@
-from tkinter import Y
 from colorama import *
 from geoloc import *
 from issloc import *
