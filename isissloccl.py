@@ -1,13 +1,13 @@
 import json, requests, pyfiglet
 from geopy.geocoders import Nominatim
 from geopy import distance
-from global_land_mask
 
 # ANSI Color Codes
 C = '\033[1;36;40m'
 Y = '\033[1;33;40m'
+B = '\033[1;34;40m'
 M = '\033[1;35;40m'
-LG = '\033[0;37;40m'
+E = '\033[0;37;40m'
 G = '\033[1;32;40m'
 
 # Banner
@@ -40,10 +40,13 @@ def GetGeoLocation(loc):
 def GetGeoReverseLocation(latlong):
         try:
             geolocator = Nominatim(user_agent="isissloccl.py")
-            location = geolocator.reverse(latlong)
-            #country = location.raw['country']
-            print(location)
-            return location
+            location = (geolocator.reverse(latlong)).raw['address']['country']
+            # Cannot identify working is_land or is_ocean from reliable pysource
+            # Using class'str' == true if ocean.
+            if '<class \'str\'>' in str(type(location)):            
+                return location
+            else:
+                return f'{B}Traversing Ocean{E}'
         except Exception as e:
             print(e)
 
@@ -58,5 +61,5 @@ co = GetGeoReverseLocation(issloc)
 
 print(f'{Y}POI Lat/Long: {C}{geoloc}')
 print(f'{Y}ISS Lat/Long: {C}{issloc}')
-print(f'{Y}ISS Country: {C}{co}')
-print(f'{Y}Elevation Distance: {C}{GetGeoDistance(geoloc, issloc)}{M}/mi{LG}')
+print(f'{Y}ISS Country: {M}{co}')
+print(f'{Y}Elevation Distance: {C}{GetGeoDistance(geoloc, issloc)}{M}/mi{E}')
