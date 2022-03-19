@@ -3,12 +3,12 @@ from geopy.geocoders import Nominatim
 from geopy import distance
 
 # ANSI Color Codes
-C = '\033[1;36;40m'
-Y = '\033[1;33;40m'
-B = '\033[1;34;40m'
-M = '\033[1;35;40m'
-E = '\033[0;37;40m'
-G = '\033[1;32;40m'
+C = '\033[1;36;40m' # Cyan
+Y = '\033[1;33;40m' # Yellow
+B = '\033[1;34;40m' # Light Blue
+M = '\033[1;35;40m' # Magenta
+E = '\033[0;37;40m' # LightGrey
+G = '\033[1;32;40m' # Green
 
 # Banner
 label = pyfiglet.figlet_format('ISS-Tracker', font='standard')
@@ -43,12 +43,9 @@ def GetGeoReverseLocation(latlong):
             location = (geolocator.reverse(latlong)).raw['address']['country']
             # Cannot identify working is_land or is_ocean from reliable pysource
             # Using class'str' == true if ocean.
-            if '<class \'str\'>' in str(type(location)):            
-                return location
-            else:
-                return f'{B}Traversing Ocean{E}'
+            return location
         except Exception as e:
-            print(e)
+            return f'{C}Traversing Ocean{E}'
 
 # Simple math, find mileage between two geo-points
 def GetGeoDistance(poi, elevatedSource):
@@ -57,9 +54,7 @@ def GetGeoDistance(poi, elevatedSource):
 physical_address = input(f"{Y}Point of Interest:{G} ")
 issloc = GetIssLocation()
 geoloc = GetGeoLocation(physical_address)
-co = GetGeoReverseLocation(issloc)
+country = GetGeoReverseLocation(issloc)
 
-print(f'{Y}POI Lat/Long: {C}{geoloc}')
-print(f'{Y}ISS Lat/Long: {C}{issloc}')
-print(f'{Y}ISS Country: {M}{co}')
-print(f'{Y}Elevation Distance: {C}{GetGeoDistance(geoloc, issloc)}{M}/mi{E}')
+print(f'{Y}POI Lat/Long: {G}{geoloc}\n{Y}ISS Lat/Long: {G}{issloc}\n{Y}ISS Country: {M}{country}')
+print(f'{Y}Elevation Distance: {G}{round(GetGeoDistance(geoloc, issloc),2)}{M}/mi{E}')
