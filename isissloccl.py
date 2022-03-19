@@ -23,7 +23,7 @@ def GetIssLocation():
         issjson = json.loads(response.text)
 
         # Get values of keys
-        longlat = [float(issjson['iss_position']['latitude']),float(issjson['iss_position']['longitude'])]       
+        longlat = [float(issjson['iss_position']['latitude']),float(issjson['iss_position']['longitude'])]
         return longlat
 
 # Point of Interest geolocator, returns long/lat
