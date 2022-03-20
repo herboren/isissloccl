@@ -1,6 +1,7 @@
 import json, requests, pyfiglet
 from geopy.geocoders import Nominatim
 from geopy import distance
+from marbl import DrawMapMarbleOrtho
 
 # ANSI Color Codes
 C = '\033[1;36;40m' # Cyan
@@ -58,3 +59,6 @@ country = GetGeoReverseLocation(issloc)
 
 print(f'{Y}POI Lat/Long: {G}{geoloc}\n{Y}ISS Lat/Long: {G}{issloc}\n{Y}ISS Country: {M}{country}')
 print(f'{Y}Elevation Distance: {G}{round(GetGeoDistance(geoloc, issloc),2)}{M}/mi{E}')
+
+# Draw Map
+DrawMapMarbleOrtho.DrawMarble(issloc)
