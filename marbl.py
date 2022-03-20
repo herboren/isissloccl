@@ -12,3 +12,4 @@ class DrawMapMarbleOrtho():
         x, y = m((coords[1]), (coords[0]))
         m.plot(x, y, marker='D', color='dodgerblue', markersize=4, markeredgewidth=1, markeredgecolor='black')
         plt.show()
+        m.plot(x, y, marker='D', color='magenta', markersize=4, markeredgewidth=1, markeredgecolor='black')
