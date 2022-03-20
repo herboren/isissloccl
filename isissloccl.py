@@ -43,7 +43,7 @@ def GetGeoReverseLocation(latlong):
             geolocator = Nominatim(user_agent="isissloccl.py")
             location = (geolocator.reverse(latlong)).raw['address']['country']
             # Cannot identify working is_land or is_ocean from reliable pysource
-            # Using class'str' == true if ocean.
+            # TryCatch to determine land or sea, so far pretty accurate.
             return location
         except Exception as e:
             return f'{C}Traversing Ocean{E}'
