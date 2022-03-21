@@ -39,7 +39,7 @@ def GetGeoLocation(loc):
         except Exception as e:
             print(e)
 
-# Point of Interest geolocator, returns long/lat
+# Returns ISS reverse for country code
 def GetGeoReverseLocation(latlong):
         try:
             geolocator = Nominatim(user_agent="isissloccl.py")
