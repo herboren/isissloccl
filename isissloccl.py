@@ -1,3 +1,5 @@
+# /u/inert-
+
 import json, requests, pyfiglet
 from geopy.geocoders import Nominatim
 from geopy import distance
